@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import jwt_decode from 'jwt-decode'
 import logo from './Logo.png';
 import BasicProfilePic from './basic-pf-pic.jpg';
+import Image from 'react-bootstrap/Image'
+import ListGroup from 'react-bootstrap/ListGroup'
+
 
 class Profile extends React.Component {
     constructor() {
@@ -14,40 +17,41 @@ class Profile extends React.Component {
           city:''
         };
       }
-
-      componentDidMount() {
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-          name: decoded.name,
-          email: decoded.email
-        })
-      }
+      
 
     render() {
         return (
           <>
-<br></br><br></br>
-              <div id='userProf'>
-                <div>
-                    <img id='basicPicP' src={BasicProfilePic} alt='ProfilePic'></img>
-                    <h2>
-                      <label id='userNameP'>Name : {this.state.name}</label>  
-                    </h2>
-                        <div id='pip'>      
-                      <h3>personal information :</h3>
-                    <li><label>email : </label>{this.state.email}</li>
-                    <br></br>
-                    <li><label>Job : </label>{this.state.job}</li>
-                    <br></br>
-                    <li><label>Age : </label>{this.state.age}</li>
-                    <br></br>
-                    <li><label>City : </label>{this.state.city}</li>
-                    </div>
-                </div>
-        </div>
-          <img src={logo} alt='Logo' id='smallLogo'></img>
-        </>
+          <div>
+         <div>
+  <Image class = 'proImg' style={{height:'250px',width:'300'}} src={BasicProfilePic} responsive />
+
+
+  <ListGroup horizontal>
+  <ListGroup.Item>Name</ListGroup.Item>
+  <ListGroup.Item>location </ListGroup.Item>
+  <ListGroup.Item>Rate</ListGroup.Item>
+  <ListGroup.Item>client</ListGroup.Item>
+</ListGroup>
+</div>
+</div>
+
+
+
+  {/* <Button variant="outline-secondary">Name</Button>{' '}
+  <Button variant="outline-secondary">Rate</Button>{' '}
+  <Button variant="outline-secondary">clients</Button>{' '}
+  <Button variant="outline-secondary">Location</Button>{' '} */}
+
+  {/* <Navbar bg="dark" variant="dark">
+    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#features">Features</Nav.Link>
+      <Nav.Link href="#pricing">Pricing</Nav.Link>
+    </Nav>
+    </Navbar> */}
+          </>
     )
   }
 }

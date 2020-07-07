@@ -7,6 +7,7 @@ import SignUpForm from './components/SignUpForm'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
 
+
 class App extends React.Component {
     render() {
         return (
