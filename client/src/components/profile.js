@@ -1,60 +1,78 @@
-import React, { Component } from 'react'
-import jwt_decode from 'jwt-decode'
-import logo from './Logo.png';
+import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Layout from "./Layout"
 import BasicProfilePic from './basic-pf-pic.jpg';
 import Image from 'react-bootstrap/Image'
-import ListGroup from 'react-bootstrap/ListGroup'
+const axios = require('axios');
 
-
-class Profile extends React.Component {
-    constructor() {
-        super();
-        this.state = {
+ class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
           name:'',
           email:'',
-          job:'',
-          age:'',
-          city:''
-        };
-      }
-      
+          location:'',
+          numOfPepole:'',
+          rate:''
+    }
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  };
 
-    render() {
-        return (
-          <>
-          <div>
-         <div>
-  <Image class = 'proImg' style={{height:'250px',width:'300'}} src={BasicProfilePic} responsive />
+  handleClick(event) {
+    event.preventDefault();
+    alert('Thank you for hiring me');
 
+  };
 
-  <ListGroup horizontal>
-  <ListGroup.Item>Name</ListGroup.Item>
-  <ListGroup.Item>location </ListGroup.Item>
-  <ListGroup.Item>Rate</ListGroup.Item>
-  <ListGroup.Item>client</ListGroup.Item>
-</ListGroup>
-</div>
-</div>
+  handleSubmit(event) {
+    event.preventDefault();
 
+    alert('Thank you for your feedback');
+  };
 
+  profileDetails=(email)=>{
+    console.log(email);
+    axios.get("http://localhost:5000/"+email)
+    .then(res=>{
+        console.log(res);
+        this.setState({email:res.data.results[0].email});
+        
+    })
+    .catch(err=>console.log(err))
+}
+componentDidMount(){
+  this.profileDetails(this.state.email);
+ }
 
-  {/* <Button variant="outline-secondary">Name</Button>{' '}
-  <Button variant="outline-secondary">Rate</Button>{' '}
-  <Button variant="outline-secondary">clients</Button>{' '}
-  <Button variant="outline-secondary">Location</Button>{' '} */}
+  render() {
+    return (
+      <>
+      <div>
+        <Image class = 'proImg' style={{height:'250px',width:'300'}} src={BasicProfilePic} responsive />
+            <ListGroup horizontal>
+            <ListGroup.Item>Name</ListGroup.Item>
+            <ListGroup.Item>location </ListGroup.Item>
+            <ListGroup.Item>Rate</ListGroup.Item>
+            <ListGroup.Item>client</ListGroup.Item>
+            </ListGroup>
+      </div>
 
-  {/* <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#features">Features</Nav.Link>
-      <Nav.Link href="#pricing">Pricing</Nav.Link>
-    </Nav>
-    </Navbar> */}
-          </>
-    )
+      <div id="Profile">
+        <Layout>
+          <Button color="primary" size="sm" /*onClick={addService(service)}*/>Add Service</Button>{" "}
+          <ListGroup>
+            <ListGroup.Item>Service 1</ListGroup.Item>
+            <ListGroup.Item>Service 2</ListGroup.Item>
+          </ListGroup>{" "}
+          <Button color="primary" size="sm">Hire Me!!</Button>{" "}
+          <Button color="primary" size="sm">Done</Button>{" "}
+        </Layout>
+      </div>
+      </>
+    );
   }
 }
+
 export default Profile;
-
-
