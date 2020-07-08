@@ -34,10 +34,11 @@ const axios = require('axios');
 
   profileDetails=(email)=>{
     console.log(email);
-    axios.get("http://localhost:5000/"+email)
+    axios.get("http://localhost:5000/profile"+email)
     .then(res=>{
         console.log(res);
-        this.setState({email:res.data.results[0].email});
+        this.setState(
+        );
         
     })
     .catch(err=>console.log(err))

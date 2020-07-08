@@ -7,10 +7,8 @@ const UserSchema = new Schema({
         email: {type: String, required: [true, "can't be blank"], unique: true},
         password: {type: String, required: [true, "can't be blank"]},
         location: {type: String, required: false},
-        service: {type: String, required: false},
-        hourCost: {type: Number, required: false},
-        img: {type: String, required: false},
-
+        service: {type: [String], required: false},
+        rate: {type: Number, required: false},
         category: {type: String, required: false}
 
     },
